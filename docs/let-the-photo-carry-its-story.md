@@ -26,7 +26,7 @@ I would test portability by reading the result in another tool and checking the 
 
 Privacy belongs in that same review. Being able to record a name does not mean every recipient should receive it. Names, locations and captions can disclose more than the visible picture. Select the fields appropriate for the recipient, especially when living people or children are involved. A demonstration can use fictional labels and a synthetic image; it does not need anyone's private collection.
 
-The public example uses two downloaded portraits that Kreavo describes as AI-generated and licenses under Creative Commons Attribution 4.0. Alex Rowan and Morgan Rowan are fictional demonstration names. The face regions are manually illustrated metadata, not recognition results. These portraits are separate from the imagined historical-society example. Photo: [Kreavo](https://kreavo.ai/free-ai-influencer-photos), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); demonstration copies add fictional labels and metadata.
+The public example uses two downloaded portraits that Kreavo describes as AI-generated and licenses under Creative Commons Attribution 4.0. Alex Rowan and Morgan Rowan are fictional demonstration names. The face regions are manually illustrated metadata, not recognition results. These portraits are separate from the imagined historical-society example. Photo: [Kreavo (kreavo.ai)](https://kreavo.ai/free-ai-influencer-photos), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); demonstration copies are resized and add fictional labels and metadata.
 
 In the prepared JPEG examples, ExifTool read-back confirms the fictional labels and region structures. This checks the saved fields; wider interoperability still needs testing.
 
