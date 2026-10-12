@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+demo-output/
+*.jpg
+*.jpeg
+*.png
+*_original
+.env
+.env.*
+!examples/synthetic.xmp
+!examples/photos/alex-rowan-plain.jpg
+!examples/photos/alex-rowan-embedded.jpg
+!examples/photos/morgan-rowan-plain.jpg
+!examples/photos/morgan-rowan-embedded.jpg

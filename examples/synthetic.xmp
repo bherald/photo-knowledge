@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<x:xmpmeta xmlns:Iptc4xmpExt="http://iptc.org/std/Iptc4xmpExt/2008-02-29/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:mwg-rs="http://www.metadataworkinggroup.com/schemas/regions/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:stArea="http://ns.adobe.com/xmp/sType/Area#" xmlns:stDim="http://ns.adobe.com/xap/1.0/sType/Dimensions#" xmlns:x="adobe:ns:meta/">
+  <rdf:RDF>
+    <rdf:Description rdf:about="">
+      <dc:description>
+        <rdf:Alt>
+          <rdf:li xml:lang="x-default">Synthetic metadata demonstration. No real person, photograph, place, or historical event is represented.</rdf:li>
+        </rdf:Alt>
+      </dc:description>
+      <dc:subject>
+        <rdf:Bag>
+          <rdf:li>synthetic</rdf:li>
+          <rdf:li>metadata demonstration</rdf:li>
+        </rdf:Bag>
+      </dc:subject>
+      <Iptc4xmpExt:PersonInImage>
+        <rdf:Bag>
+          <rdf:li>Synthetic Subject A</rdf:li>
+        </rdf:Bag>
+      </Iptc4xmpExt:PersonInImage>
+      <mwg-rs:Regions rdf:parseType="Resource">
+        <mwg-rs:AppliedToDimensions rdf:parseType="Resource" stDim:w="800" stDim:h="600" stDim:unit="pixel" />
+        <mwg-rs:RegionList>
+          <rdf:Bag>
+            <rdf:li rdf:parseType="Resource">
+              <mwg-rs:Name>Synthetic Subject A</mwg-rs:Name>
+              <mwg-rs:Type>Face</mwg-rs:Type>
+              <mwg-rs:Area rdf:parseType="Resource" stArea:unit="normalized" stArea:x="0.35" stArea:y="0.35" stArea:w="0.2" stArea:h="0.3" />
+            </rdf:li>
+          </rdf:Bag>
+        </mwg-rs:RegionList>
+      </mwg-rs:Regions>
+    </rdf:Description>
+  </rdf:RDF>
+</x:xmpmeta>

@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "dimensions": {"width": 800, "height": 600},
+  "orientation": 1,
+  "description": "Synthetic metadata demonstration. No real person, photograph, place, or historical event is represented.",
+  "keywords": ["synthetic", "metadata demonstration"],
+  "regions": [
+    {"name": "Synthetic Subject A", "approved": true, "x": 0.25, "y": 0.2, "w": 0.2, "h": 0.3}
+  ]
+}
