@@ -1,28 +1,12 @@
 # Photo Knowledge
 
-**Keep the people and context you have confirmed with the picture.**
+A photo collection can outlast the software that manages it. I want the names, face rectangles, captions and keywords people have reviewed to travel with their pictures.
 
-A photo collection can outlast the software that manages it. Names, face
-rectangles, captions, and keywords should be able to travel with that collection
-too. Photo Knowledge demonstrates a practical workflow: review the facts,
-preview the metadata, write a portable copy, and read it back.
-
-This small companion to [PLOS](https://github.com/bherald/personal-life-os-core)
-turns that workflow into an independent reference anyone can inspect and run.
-It uses established XMP, MWG region structures, and IPTC person tags. The useful
-contribution is a careful review and maintenance method built around those
-formats. See [the method](docs/method.md), [the format](docs/format.md), and
-[maintenance](docs/maintenance.md).
-
-Read Bill Herald's accompanying article:
-[Let the photo carry its own story](docs/let-the-photo-carry-its-story.md).
+Photo Knowledge is a small working example: review the details, preview the metadata, write a new XMP sidecar, and read it back. It uses existing MWG region structures and IPTC person tags. You can run it without [PLOS](https://github.com/bherald/personal-life-os-core), a cloud service or extra Python packages.
 
 ## Try it
 
-Python 3.9 or newer; no Python packages, cloud service, or PLOS installation
-required. All included example identities and context are fictional. The first
-manifest describes an imaginary upright 800 × 600 image. Two additional
-photorealistic AI-generated portraits demonstrate metadata inside real JPEG files.
+Requires Python 3.9 or newer. The first example describes an imaginary upright 800 × 600 picture. All example names and context are fictional.
 
 ```sh
 # Preview. This command writes no files.
@@ -38,69 +22,42 @@ exiftool -json -struct -XMP-mwg-rs:RegionInfo -XMP-iptcExt:PersonInImage -XMP-dc
 python3 -m unittest discover -s tests -v
 ```
 
-## See the knowledge inside a picture
+## See it in a picture
 
-| Alex Rowan — fictional label | Morgan Rowan — fictional label |
+| Alex Rowan — fictional name | Morgan Rowan — fictional name |
 | --- | --- |
-| ![AI-generated portrait with fictional label Alex Rowan](examples/photos/alex-rowan-embedded.jpg) | ![AI-generated portrait with fictional label Morgan Rowan](examples/photos/morgan-rowan-embedded.jpg) |
+| ![AI-generated portrait with fictional name Alex Rowan](examples/photos/alex-rowan-embedded.jpg) | ![AI-generated portrait with fictional name Morgan Rowan](examples/photos/morgan-rowan-embedded.jpg) |
 
-Photo: [Kreavo (kreavo.ai)](https://kreavo.ai/free-ai-influencer-photos),
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Images resized and
-fictional metadata added. The provider declares the portraits AI-generated;
-these names do not identify real people. [Source and changes](examples/photos/PROVENANCE.md).
+These JPEGs contain a fictional name, an illustrated face rectangle, caption, keywords and source credit in embedded XMP. Their adjacent input files, sidecars, plain JPEGs and readback files let you compare the before and after.
 
-Each JPEG carries its fictional person label, manually illustrated face rectangle,
-caption, keywords, and source/license credit in XMP. Move the JPEG by itself and
-those fields remain in its bytes. Inspect that directly:
+Photos: [Kreavo](https://kreavo.ai/free-ai-influencer-photos), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The provider declares them AI-generated. Images were resized and fictional metadata added. [Source and changes](examples/photos/PROVENANCE.md).
+
+Inspect the embedded fields with ExifTool:
 
 ```sh
 exiftool -json -struct -XMP:all examples/photos/alex-rowan-embedded.jpg examples/photos/morgan-rowan-embedded.jpg
 ```
 
-The adjacent `.json` input, `.xmp` sidecar, `-plain.jpg` preimage, and
-`-readback.json` make the before/after example inspectable. ExifTool 12.76 read
-back the expected fields, and decoded pixels remained identical after embedding.
-The checked examples establish this round trip; sharing services may still strip
-metadata and particular catalog applications need their own qualification.
+ExifTool 12.76 read back the expected fields, and decoded pixels stayed identical after embedding. Those checks cover these examples; I have not certified their import into particular photo managers.
 
-The tool checks explicit approval flags, finite coordinates, image bounds,
-minimum pixel coverage, upright orientation, and a strict input field list. It
-converts top-left rectangles to MWG center coordinates and emits standard XMP.
-It creates sidecars only. It neither edits images nor detects or identifies
-faces. A flag records the caller's approval; it cannot prove who approved it.
+## What the tool does
 
-## What travels, and what stays private
+The generator creates sidecars only. It checks approval flags, finite coordinates, image bounds, minimum pixel coverage and upright orientation, then converts top-left rectangles to MWG center coordinates. Dimensions and orientation are supplied manually; the tool does not inspect the image or bind it to a file hash. An approval flag records what the caller supplied, not who approved it.
 
-| Portable descriptive metadata | Private working state |
-| --- | --- |
-| Approved face rectangles and person labels | Biometric recognition vectors |
-| Reviewed caption and keywords | Unconfirmed matches and rejected suggestions |
-| Optional rights and provenance fields in a complete application | Private research evidence, relationships, IDs, and audit records |
+It does not recognize people, edit images, merge existing metadata or handle rotation/crop changes. The embedded JPEGs are prepared examples. Do not apply the imaginary picture's sidecar to a real photo.
 
-The demonstration implements the first two portable rows. It does not implement
-rights/provenance management. Numerical face embeddings are model-dependent
-recognition data; they are separate from descriptive XMP and are excluded here.
+## Keeping the information together
 
-An XMP sidecar stays beside the picture. Embedded XMP is stored inside a supported
-image file. Only the latter is literally self-contained. Sidecars need to be
-copied and backed up with their images. Tools and sharing services can ignore or
-strip metadata, so verify the actual destination rather than assuming survival.
+Embedded XMP stays inside the picture. Both traditional JPEG and newer JPEG XL (`.jxl`) can carry it, including names and face regions. The prepared examples here use JPEG; JPEG XL has not been tested in this project. A sidecar is a separate file and must be copied and backed up with its picture. Sharing services can strip metadata, and photo managers handle it differently, so check the files at the destination.
 
-For archivists, families, researchers, and collection managers, this provides a
-small, testable starting point for preserving reviewed knowledge without tying
-the whole collection to one database. A catalog remains useful for search,
-review, history, and uncertainty. Descriptive metadata is a portable output.
+Reviewed names, rectangles, captions and keywords are the portable information demonstrated here. Recognition vectors, unconfirmed matches, rejected suggestions and private research or genealogy IDs stay out. Rights and provenance management are outside the generator's current scope.
 
-## Current scope
+Read [Let the photo carry its own story](docs/let-the-photo-carry-its-story.md), [the method](docs/method.md), [the format](docs/format.md), and [maintenance notes](docs/maintenance.md) for the design and remaining work.
 
-Version 0.1.0 is a reference demonstration, not a production photo manager.
-It accepts manually supplied dimensions and orientation; it does not inspect or
-bind a manifest to an image hash. Do not apply the synthetic sidecar to a real
-photo. Metadata merging, rotation/crop transformations, image writes, automatic
-sync, identity governance, and public-export scrubbing belong to a reviewed
-application workflow. [Maintenance](docs/maintenance.md) explains those gates.
+Version **0.1.0**. Code: [MIT](LICENSE). [Sources and notices](NOTICE.md). The optional ExifTool integration test is skipped when ExifTool is not installed.
 
-ExifTool interpretation is covered by an optional integration test; tests skip
-that check when the executable is absent. Compatibility with specific catalog
-applications has not been certified. [Sources and attribution](NOTICE.md)
-describe the standards and PLOS extraction boundary. MIT licensed; see [LICENSE](LICENSE).
+## Help keep it going
+
+Thanks for taking a look. If you try the example, I would appreciate your feedback.
+
+If this example helps with your own pictures, an [optional one-time tip](https://github.com/sponsors/bherald?frequency=one-time) helps me keep testing. It does not buy support, access, priority or a deliverable.
